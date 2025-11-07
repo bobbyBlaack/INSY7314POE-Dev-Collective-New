@@ -65,6 +65,7 @@ export default function Register() {
             value={form.fullName}
             onChange={onChange}
             placeholder="Full Name"
+            pattern={patterns.fullName.toString()}
           />
           <input
             name="idNumber"
@@ -72,6 +73,7 @@ export default function Register() {
             value={form.idNumber}
             onChange={onChange}
             placeholder="ID Number"
+            pattern={patterns.idNumber.toString()}
           />
           <input
             name="accountNumber"
@@ -79,6 +81,7 @@ export default function Register() {
             value={form.accountNumber}
             onChange={onChange}
             placeholder="Account Number"
+            pattern={patterns.accountNumber.toString()}
           />
           <input
             name="password"
@@ -87,6 +90,7 @@ export default function Register() {
             onChange={onChange}
             placeholder="Password"
             type="password"
+            pattern={patterns.password.toString()}
           />
           <button type="submit" className="register-button">
             Register
