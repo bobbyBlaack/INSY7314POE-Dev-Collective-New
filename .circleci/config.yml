@@ -18,21 +18,20 @@ jobs:
           command: npm test || echo "No tests defined"
 
   sonar_scan:
-    docker:
-      - image: sonarsource/sonar-scanner-cli:latest
-    steps:
-      - run:
-          name: Checkout code
-          command: git clone $CIRCLE_REPOSITORY_URL .
-      - run:
-          name: Run SonarCloud Scan
-          command: |
-            sonar-scanner \
-              -Dsonar.projectKey=$SONAR_PROJECT_KEY \
-              -Dsonar.organization=$SONAR_ORG \
-              -Dsonar.sources=. \
-              -Dsonar.host.url=https://sonarcloud.io \
-              -Dsonar.login=$SONAR_TOKEN
+  docker:
+    - image: sonarsource/sonar-scanner-cli:latest
+  steps:
+    - checkout  # This ensures your code is present
+    - run:
+        name: Run SonarCloud Scan
+        command: |
+          sonar-scanner \
+            -Dsonar.projectKey=$SONAR_PROJECT_KEY \
+            -Dsonar.organization=$SONAR_ORG \
+            -Dsonar.sources=. \
+            -Dsonar.host.url=https://sonarcloud.io \
+            -Dsonar.login=$SONAR_TOKEN
+
 
 workflows:
   version: 2
