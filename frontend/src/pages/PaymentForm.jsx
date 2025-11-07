@@ -74,6 +74,7 @@ export default function PaymentForm() {
             value={form.amount}
             onChange={onChange}
             placeholder="Amount"
+            pattern={patterns.amount.source}
           />
           <input
             name="currency"
@@ -81,6 +82,7 @@ export default function PaymentForm() {
             value={form.currency}
             onChange={onChange}
             placeholder="Currency (e.g. USD)"
+            pattern={patterns.currency.source}
           />
           <select
             name="provider"
@@ -97,6 +99,7 @@ export default function PaymentForm() {
             value={form.payeeAccount}
             onChange={onChange}
             placeholder="Payee Account"
+            pattern={patterns.payeeAccount.source}
           />
           <input
             name="swiftCode"
@@ -104,6 +107,7 @@ export default function PaymentForm() {
             value={form.swiftCode}
             onChange={onChange}
             placeholder="SWIFT Code"
+            pattern={patterns.swiftCode.source}
           />
 
           <button type="submit" className="payment-button">

@@ -3,6 +3,12 @@ import api from "../api";
 import { Link, useNavigate } from "react-router-dom";
 import "../style.scss";
 
+// regex patterns for validation
+const patterns = {
+  accountNumber: /^\d{8,20}$/,
+  password: /^.{8,128}$/,
+};
+
 export default function Login() {
   const [form, setForm] = useState({ accountNumber: "", password: "" });
   const [msg, setMsg] = useState(null);
@@ -41,11 +47,13 @@ export default function Login() {
         <p className="login-subheading">Sign in to your account</p>
         <form onSubmit={submit} className="login-form">
           <input
+            type="text"
             name="accountNumber"
             className="login-input"
             onChange={onChange}
             value={form.accountNumber}
             placeholder="Account Number"
+            pattern={patterns.accountNumber.source}
           />
           <input
             name="password"
@@ -54,6 +62,7 @@ export default function Login() {
             onChange={onChange}
             value={form.password}
             placeholder="Password"
+            pattern={patterns.password.source}
           />
           <button type="submit" className="login-button">
             Sign In

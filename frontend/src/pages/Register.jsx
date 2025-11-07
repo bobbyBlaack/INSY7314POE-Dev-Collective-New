@@ -7,7 +7,7 @@ import "../style.scss";
 const patterns = {
   fullName: /^[A-Za-z\s.'-]{2,100}$/,
   idNumber: /^\d{6,20}$/,
-  accountNumber: /^[0-9]{8,20}$/,
+  accountNumber: /^\d{8}$/,
   password: /^.{8,128}$/,
 };
 
@@ -20,7 +20,7 @@ export default function Register() {
     password: "",
   });
   const [msg, setMsg] = useState(null);
-  const navigate = useNavigate(); // ✅ to navigate after registration
+  const navigate = useNavigate(); 
 
   function onChange(e) {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -43,7 +43,6 @@ export default function Register() {
       const res = await api.post("/auth/register", form);
       if (res.status === 201) {
         setMsg("Registered successfully! Redirecting to login...");
-        // ✅ Wait a moment, then navigate to login
         setTimeout(() => navigate("/login"), 1500);
       } else {
         setMsg("Registration failed");
@@ -65,6 +64,7 @@ export default function Register() {
             value={form.fullName}
             onChange={onChange}
             placeholder="Full Name"
+            pattern={patterns.fullName.source}
           />
           <input
             name="idNumber"
@@ -72,6 +72,7 @@ export default function Register() {
             value={form.idNumber}
             onChange={onChange}
             placeholder="ID Number"
+            pattern={patterns.idNumber.source}
           />
           <input
             name="accountNumber"
@@ -79,6 +80,7 @@ export default function Register() {
             value={form.accountNumber}
             onChange={onChange}
             placeholder="Account Number"
+            pattern={patterns.accountNumber.source}
           />
           <input
             name="password"
@@ -87,6 +89,7 @@ export default function Register() {
             onChange={onChange}
             placeholder="Password"
             type="password"
+            pattern={patterns.password.source}
           />
           <button type="submit" className="register-button">
             Register
